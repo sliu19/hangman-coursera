@@ -110,6 +110,8 @@ body {
    Links
    ========================================================================== */
  
+
+
 /*
  * Addresses `outline` inconsistency between Chrome and other browsers.
  */
@@ -312,7 +314,7 @@ ol,
 ul {
     padding: 0 0 0 40px;
 }
- 
+
 /*
  * Corrects list images handled incorrectly in IE 7.
  */
@@ -400,7 +402,8 @@ legend {
  *    and Chrome.
  * 3. Improves appearance and consistency in all browsers.
  */
- 
+
+
 button,
 input,
 select,
@@ -449,6 +452,37 @@ input[disabled] {
     cursor: default;
 }
  
+button.myButtons {
+    background:#f78096;
+    background: -moz-linear-gradient(top,#f78096 0%,#f56778 100%);
+    background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,#f78096),color-stop(100%,#f56778));
+    background: -webkit-linear-gradient(top,#f78096 0%,#f56778 100%);
+    background: -o-linear-gradient(top,#f78096 0%,#f56778 100%);
+    background: -ms-linear-gradient(top,#f78096 0%,#f56778 100%);
+        filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#f78096',endColorstr='#f78096',GradientType=0);
+    padding:5px 10px;
+    color:#fff;
+    font-family:'Helvetica Neue',sans-serif;
+    font-size:12px;
+    border-radius:4px;
+    -moz-border-radius:4px;
+    -webkit-border-radius:4px;
+    border:1px solid #ae4553;
+    margin-left:10px;
+}
+.myButtons:hover {
+    background-color:#5cbf2a;
+    font-size:16px;
+}
+.myButtons:active {
+    position:relative;
+    top:1px;
+} 
+
+.myButtons:disabled {
+    color:#ffffff;
+    background:#f10096;
+}
 /*
  * 1. Addresses box sizing set to content-box in IE 8/9.
  * 2. Removes excess padding in IE 8/9.
@@ -821,7 +855,7 @@ nav ul li a.active {
     height: 25px;
 }
 .h2-wrap {
-    background-color: #63c6ae;
+    background-color: #242a2c;
     padding: 5px 0;
 }
 .standard-block {
