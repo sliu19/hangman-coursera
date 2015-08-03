@@ -560,13 +560,14 @@ table {
  
 /*
  * Put all your custom styles here.
- */
- .clearfix:before,  
-.clearfix:after {  
-    content: " ";  
+ */ 
+.clearfix:before {  
+    padding-top: 8px;
+    content: " "; 
     display: table;  
 }  
-.clearfix:after {  
+.clearfix:after { 
+    padding-top: 6px; 
     clear: both;  
 }  
 .clearfix {  

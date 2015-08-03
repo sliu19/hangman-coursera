@@ -28,21 +28,21 @@ var GameState = function(){
 GameState.prototype = {
   preload: function() {
     //load image
-      this.load.image('background','../asset/img/background.jpg');
-      this.load.image('button','../asset/img/button.png');
-      this.load.image('heart','../asset/img/heart.png');
-      this.load.image('hmfull','../asset/img/hmfull.png');
-      this.load.image('hm0','../asset/img/hm1.png');
-      this.load.image('hm1','../asset/img/hm2.png');
-      this.load.image('hm2','../asset/img/hm3.png');
-      this.load.image('hm3','../asset/img/hm4.png');
-      this.load.image('hm4','../asset/img/hm5.png');
-      this.load.image('music','../asset/img/music.png');
+      this.load.image('background','asset/img/background.png');
+      this.load.image('button','asset/img/button.png');
+      this.load.image('heart','asset/img/heart.png');
+      this.load.image('hmfull','asset/img/hmfull.png');
+      this.load.image('hm0','asset/img/hm1.png');
+      this.load.image('hm1','asset/img/hm2.png');
+      this.load.image('hm2','asset/img/hm3.png');
+      this.load.image('hm3','asset/img/hm4.png');
+      this.load.image('hm4','asset/img/hm5.png');
+      this.load.image('music','asset/img/music.png');
     //load music
-      this.load.audio('bgm','../asset/music/bgm.mp3');
-      this.load.audio('pencil','../asset/music/pencil.wav');
-      this.load.audio('win','../asset/music/win.wav');
-      this.load.audio('lost','../asset/music/lost.wav');
+      this.load.audio('bgm','asset/music/bgm.mp3');
+      this.load.audio('pencil','asset/music/pencil.wav');
+      this.load.audio('win','asset/music/win.wav');
+      this.load.audio('lost','asset/music/lost.wav');
 
   },
   create: function() {
@@ -60,7 +60,7 @@ GameState.prototype = {
       bgm.play('',0,1,true);
       bgm.loop = true;
 
-      dead = game.add.sprite(670,100,'hmfull');
+      dead = game.add.sprite(820,100,'hmfull');
 
       heartBeat = 1;
       flip = 1;
@@ -76,8 +76,11 @@ GameState.prototype = {
     //Welcome title
     if(userName!=null) {
       userName.position.x +=movespeed;
-      if(userName.position.x>game.width-50||userName.position.x<50) {
+      if(userName.position.x>game.width-100) {
         movespeed = -movespeed;
+      }
+      if(userName.position.x<200) {
+        movespeed = 0;
       }
     }
 
@@ -111,16 +114,18 @@ game.state.start('GameState');
 * Input: life: Lives number left 
 * Result: Update heart numbers on the screen, check for game lose
 */
-function drawHeart(life) {
-  if(life == -1) {
+function drawHeart($life,$states,$word) {
+  if($life == -1) {
     lose();
-  } else if (life<lives.length) {
-    lives[life].kill();
-    lives = lives.slice(0,life);
+  } else if ($states=="won") {
+    win($word);
+  } else if ($life<lives.length) {
+    lives[$life].kill();
+    lives = lives.slice(0,$life);
     showhm();
-  } else if(life > lives.length) { 
+  } else if($life > lives.length) { 
     //new game
-    for(i = 0; i<life;i++) {
+    for(i = 0; i<$life;i++) {
       lives[i]= game.add.sprite(100+i*40,80,'heart');
       lives[i].width = 30;
       lives[i].height = 30;
@@ -135,11 +140,11 @@ function drawHeart(life) {
 * Result: Draw hangman by part. 
 */
 function drawhm() {
-  hm[0] = game.add.sprite(670,100,'hm0');
-  hm[1] = game.add.sprite(620,150,'hm1');
-  hm[2] = game.add.sprite(650,220,'hm2');
-  hm[3] = game.add.sprite(600,270,'hm3');
-  hm[4] = game.add.sprite(680,260,'hm4');
+  hm[0] = game.add.sprite(820,100,'hm0');
+  hm[1] = game.add.sprite(770,150,'hm1');
+  hm[2] = game.add.sprite(800,220,'hm2');
+  hm[3] = game.add.sprite(750,270,'hm3');
+  hm[4] = game.add.sprite(830,260,'hm4');
   hidehm();
 }
 
@@ -194,19 +199,22 @@ function lose() {
 
 /*
 * Function :win() called when game win 
-* Input: None
+* Input: word : Target phrases
 * Result: restart game.
 */
-function win(word) {
-  win = game.add.audio('win',1,true);
-  win.loop = false;
-  win.pause();
+function win ($word) {
+  alert("win");
+  winMusic = game.add.audio('win',1,true);
+  winMusic.loop = false;
+  winMusic.play();
+  bgm.stop();
   phrases.visible = false;
-  jConfirm("The phrase is : " + word, "Yeah! You win!", function(r) {
+  jConfirm("The phrase is : " + $word, "Yeah! You win!", function(r) {
     if(r){
       uploadEmail();
     } 
   });
+  hidehm();
 }
 
 
@@ -244,19 +252,23 @@ function uploadEmail() {
 function newHangMan ($test){
     //Init game variables
     bgm.play();
+    dead.angle = 0;
     dead.visible = false;
+    for(i = 0; i<lives.length;i++) lives[i].kill();
     lives= [];
     hidehm();
-    var style = { font: "32px serif", fill: "#ff0044", wordWrap: true, wordWrapWidth: game.width, align: "center" };
+    var style = { font: "42px Tangerine", fill: "#242a2c", wordWrap: true, wordWrapWidth: game.width, align: "center" };
     if(userName==null) {
-      userName  = game.add.text(100, 20, "Hello! "+ $test, style);
+      userName  = game.add.text(200, 45, "", style);
     }
+    style = { font: "44px \"Indie Flower\"", fill: "#FF0066", wordWrap: true, wordWrapWidth: game.width, align: "center" };
     if(phrases==null) {
-      phrases=game.add.text(100, 150, "", style);
+      phrases=game.add.text(80, 150, "", style);
     }
-    userName.text  = "Hello! " + $test;
+    userName.text  = "Hello! "+ $test;
     phrases.text = "";
     userName.anchor.set(0.5);
+    userName.visible = false;
     phrases.visible = true;
     buttons();
 
@@ -290,9 +302,11 @@ function updateHangMan ($key) {
 */
 function updateData(data) {
   game_id = data.game_key;
-  drawHeart(data.num_tries_left);
-  phrases.text = data.phrase;
-  if(data.state == "won") win(data.phrase);
+  tempharse = data.phrase;
+  drawHeart(data.num_tries_left,data.state,tempharse);
+  phrases.text = tempharse;
+  userName.font = "Tangerine";
+  userName.visible = true;
 }
 
 /*

@@ -1,0 +1,74 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang = "en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">  
+    <title>Hang Man--Simin</title>
+
+    <link type="text/css" href="css/jquery.alerts.css" rel="stylesheet"  media="screen">
+    <script type="text/javascript" src="js/jQuery.js" ></script>
+    <script type="text/javascript" src="js/jquery.ui.draggable.js"></script>
+    <script type="text/javascript" src="js/jquery.alerts.js"></script>
+    <script type="text/javascript" src="js/model.js"></script>
+    <script src="js/jquery-1.11.3.min.js"></script>
+    
+   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <script type="text/javascript" src="js/phaser.js"></script>
+    <!--No JS on this browser-->
+    <noscript> Your browser does not support JavaScript!</noscript>
+  </head>
+  
+  <body>
+    <header class="clearfix">
+        <div class="logo col-md-3"><h2 class="logo-text">Hangman</h2></div>
+            <nav class="clearfix">
+                <ul class="clearfix">
+                    <li class="clearfix"><form >Your Email: <input id = "userEmail" type="text" name="Email" value="Enter here"><br></form></li>
+                    <li class="clearfix"><input id="submit" type="button" onclick="uploadEmail();" value="Start New Game"></li>
+                </ul>
+            </nav>
+        </div>     
+    </header>
+    <div class="h2-wrap">
+      <div class="container">
+        <div class="row">
+            <div id="buttons" align="center">
+                <div class="col-md-12">
+                    <h2 class="standard-block">Welcome to Hangman</h2>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript" src="js/model.js"></script>
+  </body>
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/queries.css">
+  <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+  <!-- Fonts -->
+  <link href='http://fonts.googleapis.com/css?family=Sintony:400,700' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Tangerine:400,700' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Indie+Flower' rel='stylesheet' type='text/css'>
+
+  <script type="text/javascript">
+  //link textbox enter to submit
+  $("#userEmail").keypress(function(event){
+    if(event.keyCode == 13){
+        $("#submit").click();
+    }
+  });
+  $('form').keypress(function(event) { 
+    return event.keyCode != 13;
+  });
+  </script>
+</html>
