@@ -472,7 +472,7 @@ button.myButtons {
 }
 .myButtons:hover {
     background-color:#5cbf2a;
-    font-size:16px;
+    font-size:18px;
 }
 .myButtons:active {
     position:relative;
@@ -481,7 +481,7 @@ button.myButtons {
 
 .myButtons:disabled {
     color:#ffffff;
-    background:#f10096;
+    background:#FFCCFF;
 }
 /*
  * 1. Addresses box sizing set to content-box in IE 8/9.
@@ -856,7 +856,10 @@ nav ul li a.active {
 }
 .h2-wrap {
     background-color: #242a2c;
-    padding: 5px 0;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 5px;
+    height : 75px;
 }
 .standard-block {
     font-size: 24px;

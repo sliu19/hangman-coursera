@@ -36,11 +36,10 @@
         <div class="logo col-md-3"><h2 class="logo-text">Hangman</h2></div>
             <nav class="clearfix">
                 <ul class="clearfix">
-                    <li>
-                        <form>Your Email: <input id = "userEmail" type="text" name="Email" value="Enter here"><br>
-                        </form>
-                        <input id="submit" type="button" onclick="uploadEmail();" value="Start New Game">
-                    </li>
+                    <li><br></li>
+                    <li><br></li>
+                    <li><form >Your Email: <input id = "userEmail" type="text" name="Email" value="Enter here"><br></form></li>
+                    <li><input id="submit" type="button" onclick="uploadEmail();" value="Start New Game"></li>
                 </ul>
             </nav>
         </div>     
@@ -63,10 +62,10 @@
     if(event.keyCode == 13){
         $("#submit").click();
     }
-});
+  });
   $('form').keypress(function(event) { 
     return event.keyCode != 13;
-});
+  });
   </script>
 
 </html>
