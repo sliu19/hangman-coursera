@@ -53,7 +53,7 @@ GameState.prototype = {
       this.background = backgroundImg;
 
       music = this.game.add.button(10,10,'music',muteMusic,this,2,1,0);
-      music.width = 50;
+      music.width = 70;
       music.height = 50;
 
       bgm = game.add.audio('bgm',1,true);
@@ -183,9 +183,12 @@ function lose() {
   lost.play();
   bgm.stop();
   phrases.visible = false;
-  alert("You Lose  the Game!");
+  jConfirm('Try one more time!', 'Sorry, you lost', function(r) {
+    if(r){
+      uploadEmail();
+    } 
+  });
   hidehm();
-  uploadEmail();
 }
 
 
@@ -199,8 +202,11 @@ function win(word) {
   win.loop = false;
   win.pause();
   phrases.visible = false;
-  alert("You Win! The phrase is : "+ word);
-  uploadEmail();
+  jConfirm("The phrase is : " + word, "Yeah! You win!", function(r) {
+    if(r){
+      uploadEmail();
+    } 
+  });
 }
 
 
@@ -222,7 +228,8 @@ function muteMusic() {
 function uploadEmail() {
   var email = document.getElementById("userEmail").value;
   if(email==""||email=="Enter here") {
-    alert("You need to have a valid user name before start the game");
+    jAlert("You need to have a valid user name", "Hangman");
+    //alert("You need to have a valid user name before start the game");
   } else {
     newHangMan(email);
   }
@@ -257,7 +264,7 @@ function newHangMan ($test){
     $.post('http://hangman.coursera.org/hangman/game', JSON.stringify({email:$test}), function(data) {
       updateData(data);
     }, "json" ).fail( function(jqXHR, textStatus, errorThrown) {
-      alert("Error : " + textStatus + " " + errorThrown);
+      jAlert("Message : " + textStatus + " " + errorThrown,"Error");
     });
 }
 
@@ -273,7 +280,7 @@ function updateHangMan ($key) {
     $.post('http://hangman.coursera.org/hangman/game/'+ game_id, JSON.stringify({guess:$key}), function(data) {
       updateData(data);
     }, "json" ).fail( function(jqXHR, textStatus, errorThrown) {
-      alert("Error : " + textStatus + " " + errorThrown);
+      jAlert("Message : " + textStatus + " " + errorThrown,"Error");
     });
 }
 /*
